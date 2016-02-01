@@ -1,0 +1,71 @@
+.lastModifyDate {
+    color: silver;
+}
+#com-chilipeppr-widget-autolevel .nav-tabs>li>a {
+    padding: 2px 6px;
+}
+
+#com-chilipeppr-widget-autolevel .btn-group {
+    margin-left:0;
+    margin-right:4px;
+}
+#com-chilipeppr-widget-autolevel-body {
+    padding:3px;
+}
+#com-chilipeppr-widget-autolevel-body .tab-pane {
+    padding:10px 16px 20px 16px;
+    overflow:auto;
+    max-height:170px;
+}
+#com-chilipeppr-widget-autolevel-body .title {
+    width:86px;
+    float:left;
+    line-height:13px;
+    padding-top:6px;
+    /* vertical-align: middle; */
+    /* display: table-cell; */
+    /* height:100%; */
+}
+#com-chilipeppr-widget-autolevel-body .form-inline {
+    float:left;
+}
+.autoleveltbarbtn {
+    float:left;
+}
+#com-chilipeppr-widget-autolevel-body .al-coord {
+    width:75px;
+}
+.form-inline .form-group {
+    display: inline-table;
+    margin-bottom: 0;
+    vertical-align: middle;
+}
+.form-inline .input-group {
+    display: inline-table;
+    vertical-align: middle;
+}
+#com-chilipeppr-widget-autolevel-ftr {
+    font-size:11px;
+    padding:0;
+    margin:0;
+}
+#com-chilipeppr-widget-autolevel-status {
+    //overflow: auto;
+    //max-height:30px;
+    background:none;
+    border:none;
+}
+.xdropdown-menu {
+    list-style: none;
+}
+.xdropdown-menu>li>a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+    text-decoration: none;
+    background: 0 0;
+}

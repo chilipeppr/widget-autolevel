@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+    <title><!--(auto-fill by runme.js--></title>
+
+    <!-- ChiliPeppr is based on bootstrap CSS. -->
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+    <!-- Customized version of require.js for ChiliPeppr. Please see require.js docs for how
+    ChiliPeppr's dependency system works as it's based on require.js. -->
+    <script type='text/javascript' src="//i2dcui.appspot.com/js/require.js"></script>
+
+    <!-- widget.css DON'T REMOVE -->
+    <style type='text/css'>
+        /* widget.css will get inlined here by runme.js. don't remove this comment or inlining will fail. */
+    </style>
+    <link rel="stylesheet" type="text/css" href="widget.css">
+    <!-- DON'T REMOVE end widget.css -->
+
+    <!-- widget.js DON'T REMOVE -->
+    <script type='text/javascript'>
+        //<![CDATA[
+        /* widget.js will get inlined here by runme.js. don't remove this comment or inlining will fail. */
+        //]]>
+    </script>
+    <script type='text/javascript' src="widget.js"></script>
+    <!-- DON'T REMOVE end widget.js -->
+
+</head>
+
+<body>
+
+    <!--Put HTML Contents of Widget Here-->
+    <div id="com-chilipeppr-widget-autolevel" class="panel panel-default">
+        <div class="panel-heading">
+            <span class="panel-title" data-toggle="popover">Auto-Level</span>
+
+            <div class="btn-group pull-right" style="margin-right:0;">
+                <div class="dropdown">
+                    <button type="button" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+                    <ul class="dropdown-menu dropdown-menu2 xdropdown-menu-right" role="menu">
+                        <li role="presentation" class="dropdown-header">Load Probe Data From Clipboard</li>
+                        <li style="padding:0 20px;">
+                            <div class="input-group">
+                                <textarea class="form-control paste-load" placeholder="Paste Probe Data Here" style="font-size:10px;" rows="5"></textarea>
+                                <span class="input-group-btn" style="vertical-align: top;">
+                                    <button class="btn btn-default paste-load-go" style="" type="button">Load</button>
+                                </span>
+                            </div>
+                            <!-- /input-group -->
+                        </li>
+                        <li class="divider"></li>
+                        <li role="presentation" class="dropdown-header recent-files">Recent Probe Data</li>
+                        <li><a href="javascript:" class="recent-file-delete"><span class="glyphicon glyphicon-trash"></span> Clear Probe Data</a></li>
+
+                    </ul>
+                </div>
+            </div>
+
+            <div class="btn-toolbar " role="toolbar" style="padding-top:4px;">
+                <div class="btn-group" style="xmargin-left:0;">
+                    <button type="button" id="" class="btn btn-xs btn-default com-chilipeppr-widget-autolevel-autofill" data-container="body" data-toggle="popover" data-placement="auto" data-content="Auto-fill the Start At and End At positions based on the extent of your Gcode objects in the 3D Viewer"
+                    data-trigger="hover" data-delay="800">Auto-Fill
+                    </button>
+                    <!-- <button type="button" id="com-chilipeppr-widget-autolevel-raycast" class="btn btn-xs btn-default" >Raycast
+                </button> -->
+                </div>
+
+                <div class="btn-group" data-style="padding-right:6px;">
+                    <button type="button" id="" class="btn btn-xs btn-default com-chilipeppr-widget-autolevel-run" data-container="body" data-toggle="popover" data-placement="auto" data-content="Run the probing process." data-trigger="hover" data-delay="800"> <span class="glyphicon glyphicon-play"></span>
+                    </button>
+                    <button type="button" id="" class="btn btn-xs btn-default com-chilipeppr-widget-autolevel-pause" data-container="body" data-toggle="popover" data-placement="auto" data-content="Pause the probing process. If in the middle of a Z Homing pause will only occur at end."
+                    disabled="disabled" data-trigger="hover" data-delay="800"> <span class="glyphicon glyphicon-pause"></span>
+                    </button>
+                    <button type="button" id="" class="btn btn-xs btn-default com-chilipeppr-widget-autolevel-stop" data-container="body" data-toggle="popover" data-placement="auto" data-content="Stop the probe process." data-trigger="hover" data-delay="800"> <span class="glyphicon glyphicon-stop"></span>
+                    </button>
+                </div>
+
+                <div class="btn-group" data-style="padding-right:6px;">
+                    <button type="button" id="" class="btn btn-xs btn-default com-chilipeppr-widget-autolevel-viewdata"><span class="glyphicon glyphicon-list-alt"></span><span class="glyphicon glyphicon-pushpin" style="margin-left:-2px;color:#666666;"></span>
+                    </button>
+                    <button type="button" id="" class="btn btn-xs btn-default com-chilipeppr-widget-autolevel-togglematrix"><span class="glyphicon glyphicon-th-large"></span>
+                    </button>
+                    <button type="button" class="btn btn-xs btn-default dropdown-toggle" style="xpadding:0;" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-zoom-in"></span> <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li role="presentation" class="dropdown-header">Exaggerate Matrix to See Detail Better</li>
+                        <li><a href="javascript:" class="com-chilipeppr-widget-autolevel-exaggerate1x">1x (None)</a></li>
+                        <li><a href="javascript:" class="com-chilipeppr-widget-autolevel-exaggerate10x">10x</a></li>
+                        <li><a href="javascript:" class="com-chilipeppr-widget-autolevel-exaggerate50x">50x (Default)</a></li>
+                        <li><a href="javascript:" class="com-chilipeppr-widget-autolevel-exaggerate100x">100x</a></li>
+
+                    </ul>
+                </div>
+
+                <div class="btn-group" data-style="padding-right:6px;">
+                    <button type="button" id="" class="btn btn-xs btn-default com-chilipeppr-widget-autolevel-gcodeview"><span class="glyphicon glyphicon glyphicon-tasks"></span>
+                    </button>
+                    <button type="button" id="" class="btn btn-xs btn-default com-chilipeppr-widget-autolevel-gcodesendtows"><span class="glyphicon glyphicon-file"></span><span class="glyphicon glyphicon-share-alt" style="margin-left:-4px;color:#666666;"></span>
+                    </button>
+
+                    <!-- <button type="button" id="" class="btn btn-xs btn-default com-chilipeppr-widget-autolevel-envelope" >Envelope Gcode
+                </button> -->
+                </div>
+
+            </div>
+        </div>
+        <div id="com-chilipeppr-widget-autolevel-body" class="panel-body">
+
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="active"><a href="#autolevel-pre-run" role="tab" data-toggle="tab">Pre-Run</a></li>
+                <li><a href="#autolevel-run" role="tab" data-toggle="tab">Run</a></li>
+                <li><a href="#autolevel-post-run" role="tab" data-toggle="tab">Post-Run</a></li>
+                <li><a href="#autolevel-tutorial" role="tab" data-toggle="tab">Tutorial</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane active" id="autolevel-pre-run">
+
+                    <div class="btn-toolbar" role="toolbar">
+                        <div class="btn-group" style="xmargin-top:10px;">
+                            <button type="button" id="" class="btn btn-default com-chilipeppr-widget-autolevel-autofill" data-container="body" data-toggle="popover" data-placement="auto" data-content="Auto-fill the Start At and End At positions based on the extent of your Gcode objects in the 3D Viewer"
+                            data-trigger="hover" data-delay="800">Auto-Fill
+                            </button>
+                            <button type="button" id="" class="btn btn-default com-chilipeppr-widget-autolevel-toggleprobearea">Show Region to Probe
+                            </button>
+                        </div>
+                    </div>
+
+                    <p class="xalert xalert-warning" style="padding-top:6px;">Only works on TinyG Firmware 435.10 or higher.</p>
+
+                    <form class="form-inline" role="form" style="margin-right:10px;">
+                        <div class="form-group title">
+                            Steps Every
+                        </div>
+                        <div class="form-group">
+                            <input type="number" class="form-control autolevel-elem grid-steps" style="width:60px;" value="5" />
+                        </div>
+                        <div class="form-group">
+                            mm
+                        </div>
+                        <div class="form-group calc-steps hidden">
+                            -
+                        </div>
+                    </form>
+
+                    <form class="form-inline" role="form">
+                        <div class="xform-group title">
+                            Start At
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon">X</div>
+                                <input type="number" class="form-control autolevel-elem al-coord start-x" value="0" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon">Y</div>
+                                <input type="number" class="form-control autolevel-elem al-coord start-y" value="0" />
+                            </div>
+                        </div>
+                    </form>
+
+                    <form class="form-inline" role="form">
+                        <div class="xform-group title">
+                            End At
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon">X</div>
+                                <input type="number" class="form-control autolevel-elem al-coord end-x" value="0" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon">Y</div>
+                                <input type="number" class="form-control autolevel-elem al-coord end-y" value="0" />
+                            </div>
+                        </div>
+                    </form>
+
+                    <form class="form-inline" role="form">
+                        <div class="xform-group title">
+                            Clearance Height
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon">Z</div>
+                                <input type="number" class="form-control autolevel-elem al-coord high-z" value="1.5" />
+                            </div>
+                        </div>
+                    </form>
+
+                    <form class="form-inline" role="form">
+                        <div class="form-group">
+                            <div class="xform-group title">
+                                Start Probing At
+                            </div>
+                            <div class="input-group">
+                                <div class="input-group-addon">Z</div>
+                                <input type="number" class="form-control autolevel-elem al-coord probe-z" value="0.5" />
+                            </div>
+                        </div>
+                    </form>
+
+                    <form class="form-inline" role="form">
+                        <div class="form-group">
+                            <div class="xform-group title">
+                                Probe Feedrate
+                            </div>
+                            <div class="input-group">
+                                <div class="input-group-addon">F</div>
+                                <input type="number" class="form-control autolevel-elem al-coord probe-fr" value="25" />
+                            </div>
+                        </div>
+                    </form>
+
+                    <form class="form-inline" role="form">
+                        <div class="form-group">
+                            <div class="xform-group title">
+                                Max Negative Z
+                            </div>
+                            <div class="input-group">
+                                <div class="input-group-addon">Z</div>
+                                <input type="number" class="form-control autolevel-elem al-coord maxneg-z" value="-1.5" />
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+                <div class="tab-pane" id="autolevel-run">
+
+                    <div class="btn-toolbar" role="toolbar">
+                        <div class="btn-group" style="xmargin-top:10px;">
+                            <button type="button" id="" class="btn btn-default com-chilipeppr-widget-autolevel-run" data-container="body" data-toggle="popover" data-placement="auto" data-content="Run the probing process." data-trigger="hover" data-delay="800"> <span class="glyphicon glyphicon-play"></span>
+                            </button>
+                            <button type="button" id="" class="btn btn-default com-chilipeppr-widget-autolevel-pause" data-container="body" data-toggle="popover" data-placement="auto" data-content="Pause the probing process. If in the middle of a Z Homing pause will only occur at end."
+                            disabled="disabled" data-trigger="hover" data-delay="800"> <span class="glyphicon glyphicon-pause"></span>
+                            </button>
+                            <button type="button" id="" class="btn btn-default com-chilipeppr-widget-autolevel-stop" data-container="body" data-toggle="popover" data-placement="auto" data-content="Stop the probe process." data-trigger="hover" data-delay="800"> <span class="glyphicon glyphicon-stop"></span>
+                            </button>
+                        </div>
+                        <div class="btn-group" style="xmargin-top:10px;">
+                            <button type="button" id="" class="btn btn-default com-chilipeppr-widget-autolevel-runtestprobe">Run Test Probe
+                            </button>
+                        </div>
+                    </div>
+
+                    <div style="margin-top:10px;">
+
+                        <p>When you run the auto-level job, your CNC machine will move to the Start At position defined in the Pre-Run tab (typically X0 Y0) and then slowly descend on the Z axis until the Z Min Switch circuit is completed. You must make
+                            sure that your Z Min Switch is wired correctly and has minimal noise on the wiring. The TinyG does seem extra sensitive to noise. It can help to twist your wires, like the way ethernet is twisted, up to the point where you
+                            need to connect one wire to the PCB and the other to the end mill.</p>
+
+                        <p>The first point probed (the Start At position) will become your default Z0 position. A G28.2 Z0 command is issued after the first probe to set that as your Z0. All other probe locations are offsets of the first position.</p>
+
+                        <h4>Run Test Probe</h4>
+
+                        <p>It can help to run a test probe to make sure your Z Min Switch wiring is correct. When you click "run test probe" the command G38.2 Z-10 F5 is sent to the CNC controller. This will start moving your Z axis down very slowly at a
+                            5 mm/min feedrate. You must have your wires connected correctly, or you could manually choose to touch your end mill wire (alligator clip) to the PCB board well before the Z axis reaches the PCB just to test that the G28.2
+                            command stops the moment the circuit is completed.</p>
+
+                        <p>The Z-10 in the command just means your Z axis will move down a maxium of 10mm before it gives up. You should make sure that you have your Z axis set such that the Z-10 gets far enough to actually touch the PCB if you want to do
+                            a true test of the end mill making electrical contact with the PCB.</p>
+
+                        <p>Get ready on your E-Stop button in case your circuit does not complete. You can also use the red stop button in the TinyG widget to cancel the G38.2 command. That red stop button jumps ahead of any command and pauses the TinyG
+                            immediately. It works very well. Make sure to reset the TinyG planner buffer by hitting the % button afterwards.</p>
+
+                        <h4>Matrix Updates While Probing</h4>
+
+                        <p>During the probe process the matrix updates itself with the warpage. You can adjust the exaggeration of the warpage from the pulldown menu in the top toolbar.</p>
+
+                        <div class="dropdown">
+                            <button type="button" class="btn btn-default autolevel-inline" style="xpadding:0;" data-xtoggle="dropdown">
+                                <span class="glyphicon glyphicon-zoom-in"></span> <span class="caret"></span>
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <ul class="xdropdown-menu well">
+                                <li role="presentation" class="dropdown-header">Exaggerate Matrix to See Detail Better</li>
+                                <li><a href="javascript:" class="com-chilipeppr-widget-autolevel-exaggerate1x">1x (None)</a></li>
+                                <li><a href="javascript:" class="com-chilipeppr-widget-autolevel-exaggerate10x">10x</a></li>
+                                <li><a href="javascript:" class="com-chilipeppr-widget-autolevel-exaggerate50x">50x (Default)</a></li>
+                                <li><a href="javascript:" class="com-chilipeppr-widget-autolevel-exaggerate100x">100x</a></li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="tab-pane" id="autolevel-post-run">
+
+                    <div class="btn-toolbar" role="toolbar" style="xmargin-top:10px;">
+                        <!-- <div class="btn-group" style="margin-top:10px;"> -->
+                        <button type="button" class="btn btn-default com-chilipeppr-widget-autolevel-viewdata"><span class="glyphicon glyphicon-list-alt"></span><span class="glyphicon glyphicon-pushpin" style="margin-left:-2px;color:#666666;"></span> View Probe Data
+                        </button>
+                        <button type="button" id="" class="btn btn-default com-chilipeppr-widget-autolevel-togglematrix"><span class="glyphicon glyphicon-th-large"></span> Show Probe Data Matrix
+                        </button>
+                        <button type="button" class="btn btn-default com-chilipeppr-widget-autolevel-gcodeview"><span class="glyphicon glyphicon glyphicon-tasks"></span> View Auto-Levelled Gcode
+                        </button>
+                        <button type="button" id="" class="btn btn-default com-chilipeppr-widget-autolevel-gcodesendtows"><span class="glyphicon glyphicon-file"></span><span class="glyphicon glyphicon-share-alt" style="margin-left:-4px;color:#666666;"></span> Send Auto-Levelled Gcode to Workspace
+                        </button>
+                        <!-- </div> -->
+                    </div>
+
+                    <h4>Load Recent Probe Data Files</h4>
+
+                    <p>You can do this from the upper right menu for this widget. Data is automatically saved into your recent file list after the probe process is done running.</p>
+
+                    <!-- <ul class="dropdown-menu2 xdropdown-menu" style="padding:0;">
+                    <li role="presentation" class="dropdown-header recent-files">Recent Probe Data</li>
+                    <li><a href="javascript:" class="recent-file-delete"><span class="glyphicon glyphicon-trash"></span> Clear Probe Data</a></li>
+                </ul> -->
+
+                    <h4>Load Probe Data from Paste</h4>
+
+                    <p>You can do this from the upper right menu as well.</p>
+
+                    <div class="input-group">
+                        <textarea class="form-control paste-load" placeholder="Paste Probe Data Here" spellcheck="false" rows="5"></textarea>
+                        <span class="input-group-btn" style="vertical-align: top;">
+                        <button class="btn btn-default paste-load-go" style="" type="button">Load</button>
+                    </span>
+                    </div>
+                    <!-- /input-group -->
+
+                </div>
+
+                <div class="tab-pane" id="autolevel-tutorial">
+                    <!-- <iframe style="width:100%;" class="" src="//www.youtube.com/embed/6WNE3E1ZZYY" frameborder="0" allowfullscreen></iframe> -->
+                </div>
+
+            </div>
+            <!-- <textarea class="form-control" rows="3"></textarea> -->
+
+            <!-- <button type="button" id="com-chilipeppr-widget-autolevel-pause" class="btn btn-default" style="margin-top:10px;">Pause</button> -->
+
+            <!-- <button type="button" id="com-chilipeppr-widget-autolevel-autofill" class="btn btn-default" style="margin-top:10px;">Auto Fill</button> -->
+
+            <!-- <button type="button" id="com-chilipeppr-widget-autolevel-run" class="btn btn-default" style="margin-top:10px;">Run Probe</button> -->
+
+            <!-- <button type="button" id="com-chilipeppr-widget-autolevel-showregion" class="btn btn-default" style="margin-top:10px;">Show Probe Region in 3D Viewer</button> -->
+            <!-- <button type="button" id="com-chilipeppr-widget-autolevel-hideregion" class="btn btn-default" style="margin-top:10px;">Remove</button> -->
+
+        </div>
+        <div id="com-chilipeppr-widget-autolevel-ftr" class="panel-footer">
+            <textarea id="com-chilipeppr-widget-autolevel-status" class="autolevel-status form-control" rows="3">Click auto-fill, or enter probe area start/end values, or load previous probe data using menus above.</textarea>
+        </div>
+    </div>
+
+    <!-- view probe data modal -->
+    <div class="modal fade " id="com-chilipeppr-widget-modal-autolevel-view" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">View Probe Data</h4>
+                </div>
+                <div class="modal-body">
+
+                    <textarea class="form-control" placeholder="Your probe data will load here if you have any" style="height:100%;width:100%;" rows="10" spellcheck="false"></textarea>
+
+
+                </div>
+                <div class="modal-footer hidden">
+                    <button type="button" class="btn btn-default btn-autolevel-go" data-dismiss="modal">Let's Get Probing</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <!-- start probee modal -->
+    <div class="modal fade " id="com-chilipeppr-widget-modal-autolevel-start" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Starting Auto-Level</h4>
+                </div>
+                <div class="modal-body">
+
+                    <p>We are about to start auto-levelling. We will probe your entire surface of the PCB as shown in the 3D viewer. Make sure you have the probe wires correctly connected to the PCB and the endmill. The Z axis will keep lowering until the
+                        circuit is complete. If you don't have your probe wires connected completely, the circuit will never be completed and you will destroy your endmill, your PCB board, and perhaps do damage to your CNC machine. You've been warned!</p>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-autolevel-go" data-dismiss="modal">Let's Get Probing</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+</body>
+
+</html>
