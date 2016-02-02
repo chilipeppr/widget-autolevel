@@ -14,10 +14,10 @@ not conflict with other ChiliPeppr widgets.
 | ID                    | com-chilipeppr-widget-autolevel |
 | Name                  | Widget / Auto-Level |
 | Description           | Allows you to auto-level your PCB before milling. Most raw PCB boards have a slight warpage. This widget lets you probe the warpage and then it auto-scales your Gcode to match the warpage so you get very clean/predictable z-positions in your milling job. |
-| chilipeppr.load() URL | http://raw.githubusercontent.com/raykholo/widget-autolevel/master/auto-generated-widget.html |
-| Edit URL              | http://ide.c9.io/raykholo/widget-autolevel |
-| Github URL            | http://github.com/raykholo/widget-autolevel |
-| Test URL              | https://preview.c9users.io/raykholo/widget-autolevel/widget.html |
+| chilipeppr.load() URL | http://raw.githubusercontent.com/chilipeppr/widget-autolevel/master/auto-generated-widget.html |
+| Edit URL              | http://ide.c9.io/chilipeppr/widget-autolevel |
+| Github URL            | http://github.com/chilipeppr/widget-autolevel |
+| Test URL              | https://preview.c9users.io/chilipeppr/widget-autolevel/widget.html |
 
 ## Example Code for chilipeppr.load() Statement
 
@@ -30,7 +30,7 @@ back the instance of it.
 ```javascript
 chilipeppr.load(
   "#myDivWidgetInsertedInto",
-  "http://raw.githubusercontent.com/raykholo/widget-autolevel/master/auto-generated-widget.html",
+  "http://raw.githubusercontent.com/chilipeppr/widget-autolevel/master/auto-generated-widget.html",
   function() {
     // Callback after widget loaded into #myDivWidgetInsertedInto
     cprequire(
