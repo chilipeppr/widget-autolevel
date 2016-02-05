@@ -1,7 +1,7 @@
 # com-chilipeppr-widget-autolevel
 Allows you to auto-level your PCB or other conductive surface before milling. Most raw PCB boards or other surfaces have a slight warpage. This widget lets you probe the warpage and then it auto-scales your Gcode to match the warpage so you get very clean/predictable z-positions in your milling job.
 
-
+![alt text](screenshot.png "Screenshot")
 
 ## ChiliPeppr Widget / Auto-Level
 
