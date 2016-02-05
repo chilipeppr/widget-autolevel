@@ -98,7 +98,7 @@ cpdefine("inline:com-chilipeppr-widget-autolevel", ["chilipeppr_ready", "ThreeHe
         githuburl: "(auto fill by runme.js)", // The backing github repo
         testurl: "(auto fill by runme.js)",   // The standalone working widget so can view it working by itself
         name: "Widget / Auto-Level",
-        desc: "Allows you to auto-level your PCB before milling. Most raw PCB boards have a slight warpage. This widget lets you probe the warpage and then it auto-scales your Gcode to match the warpage so you get very clean/predictable z-positions in your milling job.",
+        desc: "Allows you to auto-level your PCB or other conductive surface before milling. Most raw PCB boards or other surfaces have a slight warpage. This widget lets you probe the warpage and then it auto-scales your Gcode to match the warpage so you get very clean/predictable z-positions in your milling job.",
         publish: {
         },
         subscribe: {},
