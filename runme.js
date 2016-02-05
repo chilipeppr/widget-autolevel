@@ -111,6 +111,13 @@ http.createServer(function(req, res) {
     var filename = path.join(process.cwd(), unescape(uri));
     var stats;
   
+    // see if it auto-generated-widget.html
+    // if so, regenerate it on the fly
+    console.log("Being asked for auto-generated-widget.html so regenerating first...");
+    // First we have to eval so stuff is in memory
+    evalWidgetJs();
+    generateInlinedFile();
+  
     try {
       stats = fs.lstatSync(filename); // throws if path doesn't exist
     }
@@ -805,6 +812,13 @@ var generateWidgetDocs = function() {
                   <a target="_blank" href="$pubsub-testurl">$pubsub-testurl</a>
               </td>
           </tr>
+          <tr>
+              <td>Test URL No SSL</td>
+              <td class="pubsub-testurlnossl">
+                  <a target="_blank" href="$pubsub-testurlnossl">$pubsub-testurlnossl</a>
+                  <span style="font-size:9px">(Cloud9 runme.js must be running)</span>
+              </td>
+          </tr>
       </tbody>
   </table>
   
@@ -967,9 +981,16 @@ var generateWidgetDocs = function() {
   var testUrl = 'https://preview.c9users.io/' +
     process.env.C9_USER + '/' +
     process.env.C9_PROJECT + '/widget.html';
+  
+  //var testUrlNoSsl = 'http://' + process.env.C9_PROJECT +
+  //  '-' + process.env.C9_USER + '.c9users.io/widget.html';
+  var testUrlNoSsl = 'http://' + process.env.C9_PROJECT +
+    '-' + process.env.C9_USER + '.c9users.io/auto-generated-widget.html';
+    
   var editUrl = 'http://ide.c9.io/' +
     process.env.C9_USER + '/' +
     process.env.C9_PROJECT;
+  
   var github = getGithubUrl();
   
   html = html.replace(/\$pubsub-id/g, widget.id);
@@ -978,6 +999,7 @@ var generateWidgetDocs = function() {
   html = html.replace(/\$pubsub-url/g, github.rawurl);
   html = html.replace(/\$pubsub-fiddleurl/g, editUrl);
   html = html.replace(/\$pubsub-github/g, github.url);
+  html = html.replace(/\$pubsub-testurlnossl/g, testUrlNoSsl);
   html = html.replace(/\$pubsub-testurl/g, testUrl);
   
   var cpload = generateCpLoadStmt();
@@ -1072,18 +1094,32 @@ var generateCpLoadStmt = function() {
     var rawurl = github.rawurl; //= url.replace(/\/github.com\//i, "/raw.githubusercontent.com/");
     //rawurl += '/master/auto-generated-widget.html';
     
-    js = 'chilipeppr.load(\n' +
-      '  "#myDivWidgetInsertedInto",\n' +
+    // create a camel case version of this name. split on dash
+    var arr = widget.id.replace(/com-chilipeppr/i, "").split(/-/g);
+    // now capitalize the first letter of each word
+    for (var i in arr) {
+      var s = arr[i];
+      s = s.charAt(0).toUpperCase() + s.slice(1)
+      arr[i] = s;
+    }
+    var idCamelCase = arr.join("");
+    
+    js = '' +
+      '// Inject new div to contain widget or use an existing div with an ID\n' +
+      '$("body").append(\'<\' + \'div id="myDiv' + idCamelCase + '"><\' + \'/div>\');\n\n' +
+      'chilipeppr.load(\n' +
+      '  "#myDiv' + idCamelCase + '",\n' +
       '  "' + rawurl + '",\n' +
       '  function() {\n' +
-      '    // Callback after widget loaded into #myDivWidgetInsertedInto\n' +
+      '    // Callback after widget loaded into #myDiv' + idCamelCase + '\n' +
+      '    // Now use require.js to get reference to instantiated widget\n' +
       '    cprequire(\n' +
       //'      "inline:com-chilipeppr-widget-yourname", // the id you gave your widget\n' +
       '      ["' + id + '"], // the id you gave your widget\n' +
-      '      function(mywidget) {\n' +
-      '        // Callback that is passed reference to your newly loaded widget\n' +
-      '        console.log("My widget just got loaded.", mywidget);\n' +
-      '        mywidget.init();\n' +
+      '      function(myObj' + idCamelCase + ') {\n' +
+      '        // Callback that is passed reference to the newly loaded widget\n' +
+      '        console.log("' + widget.name + ' just got loaded.", myObj' + idCamelCase + ');\n' +
+      '        myObj' + idCamelCase + '.init();\n' +
       '      }\n' +
       '    );\n' +
       '  }\n' +
