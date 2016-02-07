@@ -698,7 +698,10 @@ cpdefine("inline:com-chilipeppr-widget-autolevel", ["chilipeppr_ready", "ThreeHe
                     geometry.vertices = vertices;
                     
                     //console.log("about to triangulate shape. vertices:", vertices, "holes:", holes);
-                    triangles = THREE.Shape.Utils.triangulateShape ( vertices, holes );
+                    // used to be in pre-r73
+                    //triangles = THREE.Shape.Utils.triangulateShape ( vertices, holes );
+                    // now is this in post r73
+                    triangles = THREE.ShapeUtils.triangulateShape ( vertices, holes );
                     for( var i = 0; i < triangles.length; i++ ){
                         geometry.faces.push( new THREE.Face3( triangles[i][0], triangles[i][1], triangles[i][2] ));
                         
@@ -941,7 +944,7 @@ cpdefine("inline:com-chilipeppr-widget-autolevel", ["chilipeppr_ready", "ThreeHe
                     geometry.vertices = vertices;
                     
                     //console.log("about to triangulate shape. vertices:", vertices, "holes:", holes);
-                    triangles = THREE.Shape.Utils.triangulateShape ( vertices, holes );
+                    triangles = THREE.ShapeUtils.triangulateShape ( vertices, holes );
                     for( var i = 0; i < triangles.length; i++ ){
                         geometry.faces.push( new THREE.Face3( triangles[i][0], triangles[i][1], triangles[i][2] ));
                         
