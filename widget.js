@@ -28,11 +28,16 @@ cprequire_test(["inline:com-chilipeppr-widget-autolevel"], function (autolevel) 
     console.log("test running of " + autolevel.id);
     autolevel.init();
     
+    $('#com-chilipeppr-widget-autolevel').css('margin', '30px');
     $('#com-chilipeppr-widget-autolevel').css('position', 'relative');
     $('#com-chilipeppr-widget-autolevel').css('background', 'none');
     $('body').prepend('<div id="3dviewer"></div>');
 
-    chilipeppr.load("#3dviewer", "http://fiddle.jshell.net/chilipeppr/y3HRF/show/light/", function() {
+    chilipeppr.load(
+        "#3dviewer", 
+        //"http://fiddle.jshell.net/chilipeppr/y3HRF/show/light/", 
+        "http://raw.githubusercontent.com/chilipeppr/widget-3dviewer/master/auto-generated-widget.html",
+        function() {
         cprequire(['inline:com-chilipeppr-widget-3dviewer'], function (threed) {
             threed.init({doMyOwnDragDrop: true});
             $('#com-chilipeppr-widget-3dviewer .panel-heading').addClass('hidden');

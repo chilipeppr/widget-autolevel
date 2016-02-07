@@ -111,13 +111,6 @@ http.createServer(function(req, res) {
     var filename = path.join(process.cwd(), unescape(uri));
     var stats;
   
-    // see if it auto-generated-widget.html
-    // if so, regenerate it on the fly
-    console.log("Being asked for auto-generated-widget.html so regenerating first...");
-    // First we have to eval so stuff is in memory
-    evalWidgetJs();
-    generateInlinedFile();
-  
     try {
       stats = fs.lstatSync(filename); // throws if path doesn't exist
     }
@@ -981,16 +974,11 @@ var generateWidgetDocs = function() {
   var testUrl = 'https://preview.c9users.io/' +
     process.env.C9_USER + '/' +
     process.env.C9_PROJECT + '/widget.html';
-  
-  //var testUrlNoSsl = 'http://' + process.env.C9_PROJECT +
-  //  '-' + process.env.C9_USER + '.c9users.io/widget.html';
   var testUrlNoSsl = 'http://' + process.env.C9_PROJECT +
-    '-' + process.env.C9_USER + '.c9users.io/auto-generated-widget.html';
-    
+    '-' + process.env.C9_USER + '.c9users.io/widget.html';
   var editUrl = 'http://ide.c9.io/' +
     process.env.C9_USER + '/' +
     process.env.C9_PROJECT;
-  
   var github = getGithubUrl();
   
   html = html.replace(/\$pubsub-id/g, widget.id);
