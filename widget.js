@@ -380,7 +380,7 @@ cpdefine("inline:com-chilipeppr-widget-autolevel", ["chilipeppr_ready", "ThreeHe
             this.isMatrixShowing = true;
         },
         isFadeOutUserObject: false,
-        fadeOutUserObject: function() {
+        fadeOutUserObjectOld: function() {
             if (!this.isFadeOutUserObject && this.user3dObject != null) {
                 // fade out the user object so our matrix is visible
                 chilipeppr.publish('/com-chilipeppr-widget-3dviewer/wakeanimate', "");
@@ -388,10 +388,33 @@ cpdefine("inline:com-chilipeppr-widget-autolevel", ["chilipeppr_ready", "ThreeHe
                 var that = this;
                 that.previousLayerOpacities = [];
                 o.children.forEach(function iterLayers(lyr) {
-                    that.previousLayerOpacities.push(lyr.material.opacity);
-                    lyr.material.opacity = 0.035;
+                    // this if added on 2/23/17 to handle errors that were crapping
+                    // out auto-level
+                    if (lyr.material == undefined || lyr.material.opacity == undefined) {}
+                    else {
+                        that.previousLayerOpacities.push(lyr.material.opacity);
+                        lyr.material.opacity = 0.035;
+                    }
                 });
                 this.isFadeOutUserObject = true;
+            }
+        },
+        fadeOutUserObjectJustinVersion: function() {
+            var autolevel = this;
+            if (!autolevel.isFadeOutUserObject && autolevel.user3dObject !== null) {
+                // fade out the user object so our matrix is visible
+                chilipeppr.publish('/com-chilipeppr-widget-3dviewer/wakeanimate', "");
+                var o = autolevel.user3dObject;
+                var that = autolevel;
+                that.previousLayerOpacities = [];
+                o.children.forEach(function iterLayers(lyr) {
+                    if (lyr.material == undefined || lyr.material.opacity == undefined) {}
+                    else {
+                        that.previousLayerOpacities.push(lyr.material.opacity);
+                        lyr.material.opacity = 0.035;
+                    }
+                });
+                autolevel.isFadeOutUserObject = true;
             }
         },
         unfadeOutUserObject: function() {
