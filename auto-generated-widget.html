@@ -472,7 +472,7 @@ cpdefine("inline:com-chilipeppr-widget-autolevel", ["chilipeppr_ready", "ThreeHe
             this.isMatrixShowing = true;
         },
         isFadeOutUserObject: false,
-        fadeOutUserObjectOld: function() {
+        fadeOutUserObject: function() {
             if (!this.isFadeOutUserObject && this.user3dObject != null) {
                 // fade out the user object so our matrix is visible
                 chilipeppr.publish('/com-chilipeppr-widget-3dviewer/wakeanimate', "");
